@@ -80,7 +80,7 @@ class _GameScreenState extends ConsumerState<GameScreen> {
           // UI Overlays
           if (state.phase == GamePhase.rearrangement && !state.players[0].isReady)
             Positioned(
-              bottom: 100,
+              top: 100,
               right: 20,
               child: ElevatedButton(
                 onPressed: () => ref.read(gameStateProvider.notifier).finishRearrangement(),

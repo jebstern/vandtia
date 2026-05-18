@@ -231,6 +231,8 @@ class VandtiaLogic {
     }
 
     if (canPlayCards([card], state.playPile)) {
+        // We need to ensure playCards knows this was a faceDown card to remove it correctly
+        // Actually playCards already handles removal from hand/faceUp/faceDown
         return playCards(state, [card]);
     } else {
         // Pick up pile AND the flipped card
