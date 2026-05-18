@@ -4,7 +4,7 @@ import 'package:flame/events.dart';
 import 'package:flutter/material.dart';
 import '../../features/game/domain/card_models.dart';
 
-class CardComponent extends SpriteComponent with DragCallbacks, TapCallbacks {
+class CardComponent extends PositionComponent with DragCallbacks, TapCallbacks {
   final CardModel model;
   bool isFaceUp;
   bool isDraggable;
