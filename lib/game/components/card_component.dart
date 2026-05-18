@@ -84,6 +84,8 @@ class CardComponent extends PositionComponent with DragCallbacks, TapCallbacks {
   }
 
   void flip({required bool faceUp}) {
+    if (isFaceUp == faceUp) return;
+
     // Simple scale-based flip animation
     add(
       ScaleEffect.to(

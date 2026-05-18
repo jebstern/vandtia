@@ -53,13 +53,13 @@ class VandtiaGame extends FlameGame {
     _updatePileCards(state.burnedPile, Vector2(screenWidth - 110, screenHeight / 2 - 45), true, false);
 
     // 3. Position User Hand
-    _updateHandCards(user.hand, Vector2(screenWidth / 2, screenHeight - 80), true, true);
+    _updateHandCards(user.hand, Vector2(screenWidth / 2, screenHeight - 70), true, true);
 
     // 4. Position User Table
     _updateTableCards(user.faceUp, user.faceDown, Vector2(screenWidth / 2, screenHeight - 200), true);
 
     // 5. Position Bot Hand
-    _updateHandCards(bot.hand, Vector2(screenWidth / 2, 80), false, false);
+    _updateHandCards(bot.hand, Vector2(screenWidth / 2, 70), false, false);
 
     // 6. Position Bot Table
     _updateTableCards(bot.faceUp, bot.faceDown, Vector2(screenWidth / 2, 200), false);
@@ -199,16 +199,40 @@ class VandtiaGame extends FlameGame {
     } else if (_lastState.phase == GamePhase.rearrangement) {
         // Swap logic: if dropped on a face-up card
         final user = _lastState.players[0];
+        final cardCenter = card.position + card.size / 2;
+
         for (int i = 0; i < user.faceUp.length; i++) {
              final faceUpCard = user.faceUp[i];
-             final comp = _cardMap[faceUpCard];
-             if (comp != null && card.position.distanceTo(comp.position) < 50 && card != comp) {
-                  if (user.hand.contains(card.model)) {
-                      ref.read(gameStateProvider.notifier).swapCards(card.model, faceUpCard);
-                      return;
+             final targetComp = _cardMap[faceUpCard];
+             if (targetComp != null && targetComp != card) {
+                  final targetCenter = targetComp.position + targetComp.size / 2;
+                  if (cardCenter.distanceTo(targetCenter) < 60) {
+                      if (user.hand.contains(card.model)) {
+                          ref.read(gameStateProvider.notifier).swapCards(card.model, faceUpCard);
+                          return;
+                      } else if (user.faceUp.contains(card.model)) {
+                          // Allow face-up to hand swap by dropping face-up on a hand card?
+                          // The logic currently supports swapping any hand card with any face-up card.
+                          // If we drop a face-up card on any hand card, we can trigger swap.
+                      }
                   }
              }
         }
+
+        // Also allow dropping a face-up card onto the hand area to swap
+        if (user.faceUp.contains(card.model)) {
+             for (final handCard in user.hand) {
+                 final targetComp = _cardMap[handCard];
+                 if (targetComp != null) {
+                     final targetCenter = targetComp.position + targetComp.size / 2;
+                     if (cardCenter.distanceTo(targetCenter) < 60) {
+                         ref.read(gameStateProvider.notifier).swapCards(handCard, card.model);
+                         return;
+                     }
+                 }
+             }
+        }
+
         _updateCards(_lastState);
     }
   }
