@@ -1,5 +1,4 @@
 import 'package:flame/game.dart';
-import 'package:flame/components.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../features/game/providers/game_provider.dart';
 import '../features/game/domain/game_state.dart';
