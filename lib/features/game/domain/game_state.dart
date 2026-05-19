@@ -1,21 +1,8 @@
-import 'card_models.dart';
+import "card_models.dart";
 
-enum GamePhase {
-  setup,
-  rearrangement,
-  playing,
-  gameOver,
-}
+enum GamePhase { setup, rearrangement, playing, gameOver }
 
 class PlayerModel {
-  final String id;
-  final String name;
-  final List<CardModel> hand;
-  final List<CardModel> faceUp;
-  final List<CardModel> faceDown;
-  final bool isBot;
-  final bool isReady;
-
   const PlayerModel({
     required this.id,
     required this.name,
@@ -25,6 +12,13 @@ class PlayerModel {
     this.isBot = false,
     this.isReady = false,
   });
+  final String id;
+  final String name;
+  final List<CardModel> hand;
+  final List<CardModel> faceUp;
+  final List<CardModel> faceDown;
+  final bool isBot;
+  final bool isReady;
 
   PlayerModel copyWith({
     List<CardModel>? hand,
@@ -45,15 +39,6 @@ class PlayerModel {
 }
 
 class GameState {
-  final List<PlayerModel> players;
-  final int currentPlayerIndex;
-  final List<CardModel> stock;
-  final List<CardModel> playPile;
-  final List<CardModel> burnedPile;
-  final GamePhase phase;
-  final int dealerIndex;
-  final String? winnerId;
-
   const GameState({
     required this.players,
     required this.currentPlayerIndex,
@@ -64,6 +49,14 @@ class GameState {
     required this.dealerIndex,
     this.winnerId,
   });
+  final List<PlayerModel> players;
+  final int currentPlayerIndex;
+  final List<CardModel> stock;
+  final List<CardModel> playPile;
+  final List<CardModel> burnedPile;
+  final GamePhase phase;
+  final int dealerIndex;
+  final String? winnerId;
 
   PlayerModel get currentPlayer => players[currentPlayerIndex];
 

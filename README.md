@@ -1,17 +1,41 @@
-# vandtia
+# Vändtia
 
-A new Flutter project.
+A digital version of the Swedish card game **Vändtia** ("turn ten"), built with
+Flutter. The MVP is a single-player game: a human player versus a bot.
 
-## Getting Started
+Each player holds three hand cards, three face-up cards, and three hidden
+face-down cards. Players race to shed all of their cards by playing onto a
+shared pile, with special cards (2, 10, and four-of-a-kind) that burn the pile
+or grant extra turns.
 
-This project is a starting point for a Flutter application.
+The full ruleset is in [RULES.md](RULES.md).
 
-A few resources to get you started if this is your first Flutter project:
+## Running the game
 
-- [Learn Flutter](https://docs.flutter.dev/get-started/learn-flutter)
-- [Write your first Flutter app](https://docs.flutter.dev/get-started/codelab)
-- [Flutter learning resources](https://docs.flutter.dev/reference/learning-resources)
+```sh
+flutter pub get
+flutter run
+```
 
-For help getting started with Flutter development, view the
-[online documentation](https://docs.flutter.dev/), which offers tutorials,
-samples, guidance on mobile development, and a full API reference.
+Run the tests with:
+
+```sh
+flutter test
+```
+
+## Tech stack
+
+- **Flutter** (Dart SDK `^3.11.0`)
+- **[Flame](https://flame-engine.org/)** — the card board, rendering, and
+  drag/tap/animation handling.
+- **[Riverpod](https://riverpod.dev/)** — game state management.
+
+## Project layout
+
+- `lib/features/game/domain/` — game models and pure rules logic
+  (`vandtia_logic.dart`, `game_state.dart`, `card_models.dart`).
+- `lib/features/game/providers/` — the Riverpod `GameNotifier`, including the
+  bot's move logic.
+- `lib/game/` — the Flame game (`vandtia_game.dart`) and the card component.
+- `lib/game_screen.dart` — the screen hosting the game widget and UI overlays.
+- `test/` — unit tests for the rules logic.

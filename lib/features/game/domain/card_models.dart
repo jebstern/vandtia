@@ -1,9 +1,6 @@
-enum Suit {
-  clubs,
-  diamonds,
-  hearts,
-  spades,
-}
+import "package:flutter/material.dart";
+
+enum Suit { clubs, diamonds, hearts, spades }
 
 enum Rank {
   two(2),
@@ -20,15 +17,15 @@ enum Rank {
   king(13),
   ace(14);
 
-  final int value;
   const Rank(this.value);
+  final int value;
 }
 
+@immutable
 class CardModel {
+  const CardModel({required this.suit, required this.rank});
   final Suit suit;
   final Rank rank;
-
-  const CardModel({required this.suit, required this.rank});
 
   @override
   bool operator ==(Object other) =>
@@ -42,5 +39,5 @@ class CardModel {
   int get hashCode => suit.hashCode ^ rank.hashCode;
 
   @override
-  String toString() => '$rank of $suit';
+  String toString() => "$rank of $suit";
 }

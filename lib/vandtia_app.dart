@@ -1,6 +1,6 @@
-import 'package:flutter/material.dart';
-import 'package:flutter_riverpod/flutter_riverpod.dart';
-import 'package:vandtia/main_menu.dart';
+import "package:flutter/material.dart";
+import "package:flutter_riverpod/flutter_riverpod.dart";
+import "main_menu.dart";
 
 class VandtiaApp extends ConsumerWidget {
   const VandtiaApp({super.key});
@@ -8,7 +8,7 @@ class VandtiaApp extends ConsumerWidget {
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     return MaterialApp(
-      title: 'Vändtia',
+      title: "Vändtia",
       theme: ThemeData(
         colorScheme: ColorScheme.fromSeed(seedColor: Colors.green),
         useMaterial3: true,

@@ -1,5 +1,7 @@
-import 'package:flutter/material.dart';
-import 'package:vandtia/game_screen.dart';
+import "dart:async";
+
+import "package:flutter/material.dart";
+import "game_screen.dart";
 
 class MainMenu extends StatelessWidget {
   const MainMenu({super.key});
@@ -12,9 +14,9 @@ class MainMenu extends StatelessWidget {
         child: Column(
           mainAxisAlignment: MainAxisAlignment.center,
           mainAxisSize: MainAxisSize.min,
-          children: [
+          children: <Widget>[
             const Text(
-              'Vändtia',
+              "Vändtia",
               style: TextStyle(
                 color: Colors.white,
                 fontSize: 64,
@@ -31,11 +33,15 @@ class MainMenu extends StatelessWidget {
                 ),
               ),
               onPressed: () {
-                Navigator.of(context).push(
-                  MaterialPageRoute(builder: (context) => const GameScreen()),
+                unawaited(
+                  Navigator.of(context).push(
+                    MaterialPageRoute<Object?>(
+                      builder: (BuildContext context) => const GameScreen(),
+                    ),
+                  ),
                 );
               },
-              child: const Text('New Game', style: TextStyle(fontSize: 24)),
+              child: const Text("New Game", style: TextStyle(fontSize: 24)),
             ),
           ],
         ),
